@@ -36,21 +36,20 @@ const SignUp = () => {
                             </div>
                             
                             <button type="submit" className="btn btn-primary px-5 py-3 text-uppercase">Sign Up</button>
-                            <div className="mt-3 text-center">
+                            <div className="my-3 text-center">
                               <Link to="/login"><span>Already has an account?</span></Link>
                             </div>
                         </form>
                     </div>
                     <div className="col">
-                    <h3 className="text-center">Get Started</h3>
-                        <div>
+                    <h3 className="text-center d-none d-md-block">Get Started</h3>
+                        <div className="d-none d-md-block">
                             <img className="img-fluid" src="https://i.ibb.co/p0xF8fc/online-registration-sign-up-concept-flat-vector-illustration-young-male-cartoon-character-sitting-hu.jpg" alt="" />
                         </div>
                        
                         <div className="text-center d-flex">
                             <button onClick={signInWithGoogle} className="btn btn-danger w-100 me-2">Google</button>
                             <button className="btn btn-dark w-100 me-2">Github</button>
-                            <button className="btn btn-primary w-100">Facebook</button>
                         </div>
                     </div>
                 </div>

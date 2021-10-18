@@ -12,6 +12,7 @@ const useFirebase = () => {
     // State
     const [user,setUser] = useState('');
     const [error,setError] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
 
     // google sign In
     const signInWithGoogle = () => {
@@ -25,9 +26,12 @@ const useFirebase = () => {
     // Log Out 
     const logOut = () => {
         signOut(auth).then(() => {
-            setUser('');
+
           }).catch((error) => {
             setError(error);
+          })
+          .finally( () => {
+              setIsLoading(false);
           });
     }
 
@@ -41,13 +45,16 @@ const useFirebase = () => {
             } else {
               setError('');
             }
+            setIsLoading(false);
           });
     },[]);
     return {
         user,
         error,
+        isLoading,
         signInWithGoogle,
         logOut
+        
     }
        
 };
