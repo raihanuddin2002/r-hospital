@@ -36,3 +36,71 @@
     transform: rotate(360deg);
   }
 }
+/*===================
+    1.COMMON CSS
+ ==================== */
+
+ body {
+  /* font-family: 'Mulish', sans-serif !important; */
+}
+
+.h1 {
+  font-size: 46px;
+  font-weight: 900;
+}
+
+.btn-btn {
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  background: #458FF6;
+  border-radius: 50px;
+  font-weight: bold;
+}
+.btn-btn:hover{
+  opacity: 0.8;
+}
+
+.btn-btn-outline-primary {
+  color: #458FF6;
+  border: 1px solid #458FF6;
+  padding: 15px 50px;
+  background: none;
+  border-radius: 50px;
+  font-weight: bold;
+}
+.btn-btn-outline-primary:hover{
+  background: #458FF6;
+  color: white;
+}
+
+.arrow {
+  width: 100px;
+  height: 3px;
+  background: black;
+}
+
+
+/* Second sec */
+
+.second-section {
+  /* background: url(../images/bg\ elementd.png); */
+  background-repeat: no-repeat;
+  background-position: left center;
+}
+
+.rounded-4 {
+  border-radius: 20px;
+}
+
+
+/* fifth */
+
+.fifth-container {
+  background: #458FF6;
+}
+
+.pd {
+  padding-right: 0% !important;
+  padding-left: 8%;
+}
