@@ -13,25 +13,25 @@ const SignUp = () => {
                         <form className="border-0">
                             <div className="mb-3 row row-cols-md-2">
                                <div>
-                                    <label for="exampleInputEmail1" className="form-label fw-bold">First Name</label>
+                                    <label htmlFor="exampleInputEmail1" className="form-label fw-bold">First Name</label>
                                     <input type="text" className="form-control border-0 border-bottom border-2 border-dark" />
                                </div>
 
                                <div>
-                                    <label for="exampleInputEmail1" className="form-label fw-bold">Last Name</label>
+                                    <label htmlFor="exampleInputEmail1" className="form-label fw-bold">Last Name</label>
                                     <input type="text" className="form-control border-0 border-bottom border-2 border-dark" />
                                </div>
                             </div>
                             <div className="mb-3">
-                                <label for="exampleInputEmail1" className="form-label fw-bold">Email address</label>
+                                <label htmlFor="exampleInputEmail1" className="form-label fw-bold">Email address</label>
                                 <input type="email" className="form-control border-0 border-bottom border-2 border-dark" id="exampleInputEmail1" aria-describedby="emailHelp" />
                             </div>
                             <div className="mb-3">
-                                <label for="exampleInputPassword1" className="form-label fw-bold">Password</label>
+                                <label htmlFor="exampleInputPassword1" className="form-label fw-bold">Password</label>
                                 <input type="password" className="form-control border-0 border-bottom border-2 border-dark" id="exampleInputPassword1"/>
                             </div>
                             <div className="mb-3">
-                                <label for="exampleInputPassword1" className="form-label fw-bold">Confirm Password</label>
+                                <label htmlFor="exampleInputPassword1" className="form-label fw-bold">Confirm Password</label>
                                 <input type="password" className="form-control border-0 border-bottom border-2 border-dark" id="exampleInputPassword1"/>
                             </div>
                             

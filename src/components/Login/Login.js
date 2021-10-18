@@ -1,11 +1,30 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useLocation,useHistory } from 'react-router';
 import {AuthContext} from '../../context/AuthProvider';
 import useAuth from '../../hooks/useAuth';
 
 const Login = () => {
-    const allContext= useContext(AuthContext);
-    const {signInWithGoogle} = allContext;
+    const {signInWithGoogle} = useAuth();
+
+    // History & location
+    const location = useLocation();
+    console.log(location)
+    const history = useHistory();
+    const redirect_url = location.state?.from || "/home";
+    // const redirect_url = "/serviceDetails";
+    console.log(redirect_url)
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+        .then((result) => {
+            history.push(redirect_url);
+            console.log("Login Sucessfully");
+            // ...
+        }).catch((error) => {
+            // ...
+        });
+    }
     return (
         <div className="bg-dark py-5">
             <div className="container text-start p-5 bg-white my-5">
@@ -14,11 +33,11 @@ const Login = () => {
                         <h1 className="mb-5">Log In</h1>
                         <form className="border-0">
                             <div className="mb-3">
-                                <label for="exampleInputEmail1" className="form-label fw-bold">Email address</label>
+                                <label htmlFor="exampleInputEmail1" className="form-label fw-bold">Email address</label>
                                 <input type="email" className="form-control border-0 border-bottom border-2 border-dark" id="exampleInputEmail1" aria-describedby="emailHelp" />
                             </div>
                             <div className="mb-3">
-                                <label for="exampleInputPassword1" className="form-label fw-bold">Password</label>
+                                <label htmlFor="exampleInputPassword1" className="form-label fw-bold">Password</label>
                                 <input type="password" className="form-control border-0 border-bottom border-2 border-dark" id="exampleInputPassword1"/>
                             </div>
                             
@@ -34,7 +53,7 @@ const Login = () => {
                             <img className="img-fluid" src="https://i.ibb.co/p0xF8fc/online-registration-sign-up-concept-flat-vector-illustration-young-male-cartoon-character-sitting-hu.jpg" alt="" />
                         </div>
                         <div className="text-center d-flex">
-                            <button  onClick={signInWithGoogle} className="btn btn-danger w-100 me-2">Google</button>
+                            <button  onClick={handleGoogleSignIn} className="btn btn-danger w-100 me-2">Google</button>
                             <button className="btn btn-dark w-100 me-2">Github</button>
                             <button className="btn btn-primary w-100">Facebook</button>
                         </div>

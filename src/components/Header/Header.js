@@ -43,7 +43,7 @@ const Header = () => {
                             <Link className="nav-link" to="/signup"><button className="btn-btn fw-bold text-uppercase rounded-2">Sign up</button></Link>
                         </li>}
                        {user && <li className="nav-item">
-                            <Link className="nav-link"><button className="btn-btn fw-bold text-uppercase rounded-2">{user.displayName}</button></Link>
+                            <Link className="nav-link" to="/"><button className="btn-btn fw-bold text-uppercase rounded-2">{user.displayName}</button></Link>
                         </li>}
                     </ul>
 

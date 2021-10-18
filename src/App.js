@@ -7,6 +7,9 @@ import Footer from './components/Footer/Footer';
 import SignUp from './components/SignUp/SignUp';
 import Login from './components/Login/Login';
 import AuthProvider from './context/AuthProvider';
+import NotFound from './components/NotFound/NotFound';
+import ServiceDetails from './components/ServiceDetails/ServiceDetails';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 function App() {
   return (
@@ -20,6 +23,14 @@ function App() {
                   <Home></Home>
               </Route>
 
+              {/* <PrivateRoute  path="/serviceDetails">
+                  <ServiceDetails></ServiceDetails>
+              </PrivateRoute> */}
+
+              <PrivateRoute  path="/serviceDetails/:id">
+                  <ServiceDetails></ServiceDetails>
+              </PrivateRoute>
+
               <Route path="/login">
                   <Login></Login>
               </Route>
@@ -27,8 +38,13 @@ function App() {
               <Route path="/signup">
                   <SignUp></SignUp>
               </Route>
+
               <Route exact path="/">
                   <Home></Home>
+              </Route>
+
+              <Route path="*">
+                  <NotFound></NotFound>
               </Route>
 
           </Switch>
