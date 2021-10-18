@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthProvider';
 
 const Header = () => {
+    const allContext= useContext(AuthContext);
+    const {user,logOut} = allContext;
     return (
-        <div>
+        <div className="sticky-top bg-white">
             <nav className="navbar navbar-expand-lg navbar-light">
                 <div className="container">
                     <span className="navbar-brand text-primary">R HOSPITAL</span>
@@ -30,12 +33,18 @@ const Header = () => {
                     </ul>
 
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0 d-flex align-items-center fw-bold">
-                        <li className="nav-item text-uppercase">
-                            <Link className="nav-link text-dark px-4" to="/login">Login</Link>
-                        </li>
-                        <li className="nav-item">
+                        {!user && <li className="nav-item text-uppercase">
+                            <Link className="nav-link text-dark px-4" to="/login">Log in</Link>
+                        </li>}
+                        {user && <li className="nav-item text-uppercase" onClick={logOut}>
+                            <Link className="nav-link text-dark px-4" to="/login">Log out</Link>
+                        </li>}
+                       {!user && <li className="nav-item">
                             <Link className="nav-link" to="/signup"><button className="btn-btn fw-bold text-uppercase rounded-2">Sign up</button></Link>
-                        </li>
+                        </li>}
+                       {user && <li className="nav-item">
+                            <Link className="nav-link"><button className="btn-btn fw-bold text-uppercase rounded-2">{user.displayName}</button></Link>
+                        </li>}
                     </ul>
 
                     </div>
