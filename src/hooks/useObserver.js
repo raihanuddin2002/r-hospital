@@ -12,7 +12,6 @@ const useObserver = () => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 setSignUpUser(user);
-                //console.log("observe wroks")
               // ...
             } else {
               setError('');

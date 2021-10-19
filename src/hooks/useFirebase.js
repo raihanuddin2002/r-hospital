@@ -19,7 +19,11 @@ const useFirebase = () => {
     const signInWithGoogle = () => {
       
         const googleProvider = new GoogleAuthProvider();
-    
+        if(user.email === undefined){
+          setIsLoading(true);
+        }else{
+          setIsLoading(false);
+        }
         return signInWithPopup(auth, googleProvider);
     
     }
@@ -32,17 +36,22 @@ const useFirebase = () => {
             setError(error);
           })
           .finally( () => {
-              setIsLoading(false);
+            setIsLoading(false);
           });
     }
 
     const {signUpUser,isSignUpLoading} = useObserver();
-    
-    //console.log(signUpUser)
     useEffect( () => {
       setUser(signUpUser);
+      if(user.email === undefined){
+        setIsLoading(true);
+      }else{
+        setIsLoading(false);
+      }
       //setIsLoading(isSignUpLoading);
-    },[signUpUser])
+    },[signUpUser]);
+
+   
 
     return {
         user,
