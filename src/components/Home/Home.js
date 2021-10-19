@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import HeroSection from './HeroSection/HeroSection';
 import Services from './Services/Services';
 
@@ -124,7 +125,7 @@ const Home = () => {
                     </div>
                 </div>
                 <p className="text-center mt-5">
-                    <button className="btn-btn-outline-primary">View all</button>
+                    <Link to="/blog"><button className="btn-btn-outline-primary">View all</button></Link>
                 </p>
                  {/* blank */}
              <div className="blank d-none d-lg-block" style={{height:"70px"}}></div>
