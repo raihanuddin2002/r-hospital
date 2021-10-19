@@ -18,6 +18,7 @@ const About = () => {
             </div>
 
             {/* Overview */}
+            <div className="bg-secondary">
             <div className="container py-5">
                 <div className="courses-header text-center">
                     <h2 className="card-header text-white courses-heading py-4 mt-lg-5 display-3 bg-dark">OVERVIEW</h2>
@@ -25,7 +26,7 @@ const About = () => {
                 </div>
 
                 <div>
-                <table className="table table-light table-striped table-responsive table-bordered fs-4">
+                <table className="table table-light table-striped table-responsive table-bordered fs-4 p-2">
                             <tbody>
                                 <tr>
                                     <td>1</td>
@@ -79,6 +80,7 @@ const About = () => {
                             </tbody>
                         </table>
                 </div>
+            </div>
             </div>
         </div>
     );
