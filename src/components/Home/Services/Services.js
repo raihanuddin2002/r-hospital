@@ -36,7 +36,7 @@ const Services = () => {
                 </div>
             </div>
             <p className="text-center mt-5">
-                <Link to="/services"><button className="btn-btn-outline-primary my-5">See more</button></Link>
+                <Link to="/our-services"><button className="btn-btn-outline-primary my-5">See more</button></Link>
             </p>
         </div>
     );

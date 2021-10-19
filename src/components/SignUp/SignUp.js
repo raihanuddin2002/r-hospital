@@ -1,10 +1,11 @@
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, updateProfile  } from '@firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import {useHistory } from 'react-router';
 import useAuth from '../../hooks/useAuth';
 
 const SignUp = () => {
-   
+    const history = useHistory();
     const [name,setName] = useState('');
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
@@ -19,7 +20,6 @@ const SignUp = () => {
     const handleGoogleSignIn = () => {
         signInWithGoogle()
             .then((result) => {
-                setSignUpMessage("Your New Google Account Created Succufully");
                 setTimeout( () => {
                     setSignUpMessage("");
                 },5000);
@@ -63,11 +63,7 @@ const SignUp = () => {
             setError('');
         }
 
-        // Set username
-        const setUserName = () => {
-            updateProfile(auth.currentUser, {
-                displayName: name}).then(() => {}).catch((error) => {setError(error)});
-        }
+        
 
         // Manual create account
         createUserWithEmailAndPassword(auth, email, password)
@@ -77,11 +73,18 @@ const SignUp = () => {
                 e.target.reset();
                 setTimeout( () => {
                     setSignUpMessage("");
-                },15000);
+                    history.push("/login");
+                },5000);
             })
             .catch((error) => {
                 setError(error.message);
             });
+            
+        // Set username
+        const setUserName = () => {
+            updateProfile(auth.currentUser, {
+                displayName: name}).then(() => {}).catch((error) => {setError(error)});
+        }
     }
    
     return (
@@ -89,7 +92,7 @@ const SignUp = () => {
             <div className="container text-start p-5 bg-white my-5">
                 <div className="row row-cols-lg-2">
                     <div className="col my-auto">
-                        {signUpMessage && <div className="alert alert-success" role="alert">Sign up Successfully</div>}
+                        {signUpMessage && <h6 className="text-success" role="alert">{signUpMessage}</h6>}
                         <h1 className="mb-5">Sign Up</h1>
                         <form onSubmit={handleRegistration} className="border-0">
                             <div className="mb-3">

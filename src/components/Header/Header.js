@@ -4,9 +4,9 @@ import { AuthContext } from '../../context/AuthProvider';
 import useAuth from '../../hooks/useAuth';
 
 const Header = () => {
-    const allContext= useContext(AuthContext);
-    const {user,logOut} = allContext;
-    // const {user,logOut} = useAuth();
+    // const allContext= useContext(AuthContext);
+    // const {user,logOut} = allContext;
+    const {user, logOut} = useAuth();
     return (
         <div className="sticky-top bg-white">
             <nav className="navbar navbar-expand-lg navbar-light">

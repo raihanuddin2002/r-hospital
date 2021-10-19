@@ -4,6 +4,7 @@ import useAuth from '../../hooks/useAuth';
 
 const ServiceDetails = () => {
     const {id} = useParams();
+    console.log(id)
 
     const [services,setServices] = useState([]);
     const [singleService, setSingleService] = useState({});

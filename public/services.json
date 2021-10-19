@@ -49,35 +49,35 @@
     },
     {
         "id" : 7,
-        "title" : "title",
-        "description" : "desc",
-        "image_url" : "url",
+        "title" : "Blood Pressure Monitor",
+        "description" : "Blood pressure is the force of your blood pushing against the walls of your arteries. Each time your heart beats, it pumps blood into the arteries. Your blood pressure is highest when your heart beats, pumping the blood.",
+        "image_url" : "https://i.ibb.co/7vY12Mf/Framedetals.png",
         "degree": "MBBS",
-        "doctor_name": "Alis Sadman"
+        "doctor_name": "Adam Saman"
     },
     {
         "id" : 8,
-        "title" : "title",
-        "description" : "desc",
-        "image_url" : "url",
+        "title" : "First Aid",
+        "description" : "First aid refers to the emergency or immediate care you should provide when a person is injured or ill until full medical treatment is available. ",
+        "image_url" : "https://i.ibb.co/9NQ8369/Framebottol.png",
         "degree": "MBBS",
-        "doctor_name": "Alis Sadman"
+        "doctor_name": "Alok Adman"
     },
     {
         "id" : 9,
-        "title" : "title",
-        "description" : "desc",
-        "image_url" : "url",
+        "title" : "Medcine",
+        "description" : " Medicines can treat diseases and improve your health. If you are like most people, you need to take medicine at some point in your life.",
+        "image_url" : "https://i.ibb.co/gVqRyrh/Frametrocking.png",
         "degree": "MBBS",
-        "doctor_name": "Alis Sadman"
+        "doctor_name": "Mita Paul"
     },
     {
         "id" : 10,
-        "title" : "title",
-        "description" : "desc",
-        "image_url" : "url",
-        "degree": "MBBS",
-        "doctor_name": "Alis Sadman"
+        "title" : "Emergency",
+        "description" : "The Emergency Services Sector (ESS) is a community of millions of highly-skilled, trained personnel, along    with the physical and cyber resources, ...",
+        "image_url" : "https://i.ibb.co/qRV1SgV/Frameemergency.png",
+        "degree": "FCPS",
+        "doctor_name": "Neman Vogla, Daina Adelena"
         
     }
 ]

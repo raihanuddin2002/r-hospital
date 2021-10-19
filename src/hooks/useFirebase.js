@@ -24,11 +24,6 @@ const useFirebase = () => {
     
     }
 
-    // Sign in with email & password
-    const signInEmailAndPassword = () => {
-       
-    }
-
     // Log Out 
     const logOut = () => {
         signOut(auth).then(() => {
@@ -41,33 +36,19 @@ const useFirebase = () => {
           });
     }
 
+    const {signUpUser,isSignUpLoading} = useObserver();
     
-        const {signUpUser} = useObserver();
-        
-        console.log(signUpUser)
-        useEffect( () => {
-          setUser(signUpUser);
-        },[signUpUser])
-    // // Observe 
-    //   useEffect( () => {
-    //     onAuthStateChanged(auth, (user) => {
-    //         if (user) {
-    //           setUser(user)
-    //           const uid = user.uid;
-    //           // ...
-    //         } else {
-    //           setError('');
-    //         }
-    //         setIsLoading(false);
-    //       });
-    // },[]);
+    //console.log(signUpUser)
+    useEffect( () => {
+      setUser(signUpUser);
+      //setIsLoading(isSignUpLoading);
+    },[signUpUser])
 
     return {
         user,
         error,
         isLoading,
         signInWithGoogle,
-        signInEmailAndPassword,
         onAuthStateChanged,
         logOut
         
