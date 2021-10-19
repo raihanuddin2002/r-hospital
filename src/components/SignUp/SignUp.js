@@ -1,27 +1,39 @@
-import { createUserWithEmailAndPassword, getAuth } from '@firebase/auth';
-import React, { useState } from 'react';
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, updateProfile  } from '@firebase/auth';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
 const SignUp = () => {
+   
+    const [name,setName] = useState('');
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [confirmPassword,setConfirmPassword] = useState('');
     const [error,setError] = useState('');
+    const [signUpMessage, setSignUpMessage] = useState(''); // success signup message
+    
 
     const {signInWithGoogle} = useAuth();
-
+    const auth =getAuth();
     // Google Sign Up
     const handleGoogleSignIn = () => {
         signInWithGoogle()
-        .then((result) => {
-            console.log("Login Sucessfully");
+            .then((result) => {
+                setSignUpMessage("Your New Google Account Created Succufully");
+                setTimeout( () => {
+                    setSignUpMessage("");
+                },5000);
             // ...
         }).catch((error) => {
+            setError(error.message);
             // ...
         });
     }
 
+    // get name
+    const getName = (e) => {
+        setName(e.target.value);
+    }
     // get email
     const getEmail = (e) => {
         setEmail(e.target.value);
@@ -36,51 +48,65 @@ const SignUp = () => {
        setConfirmPassword(confirmPass);
     }
 
-    // Manual registration
+    /*===========================
+     *  Manual registration 
+     *==========================*/
     const handleRegistration = (e) => {
         e.preventDefault();
 
-        const auth =getAuth();
-        console.log(email,password);
+        console.log(name,email,password);
+
+        // Password & confirm password match
         if(password !== confirmPassword){
             return setError("Password not matched!!");
+        }else{
+            setError('');
         }
+
+        // Set username
+        const setUserName = () => {
+            updateProfile(auth.currentUser, {
+                displayName: name}).then(() => {}).catch((error) => {setError(error)});
+        }
+
+        // Manual create account
         createUserWithEmailAndPassword(auth, email, password)
-        .then((result) => {
-            
-        })
-        .catch((error) => {
-        });
+            .then((result) => {
+                setUserName();
+                setSignUpMessage("Your New Account Created Succufully");
+                e.target.reset();
+                setTimeout( () => {
+                    setSignUpMessage("");
+                },15000);
+            })
+            .catch((error) => {
+                setError(error.message);
+            });
     }
+   
     return (
         <div className="bg-dark py-5">
             <div className="container text-start p-5 bg-white my-5">
                 <div className="row row-cols-lg-2">
                     <div className="col my-auto">
+                        {signUpMessage && <div className="alert alert-success" role="alert">Sign up Successfully</div>}
                         <h1 className="mb-5">Sign Up</h1>
                         <form onSubmit={handleRegistration} className="border-0">
-                            <div className="mb-3 row row-cols-md-2">
-                               <div>
-                                    <label htmlFor="exampleInputEmail1" className="form-label fw-bold">First Name</label>
-                                    <input type="text" className="form-control border-0 border-bottom border-2 border-dark" />
-                               </div>
-
-                               <div>
-                                    <label htmlFor="exampleInputEmail1" className="form-label fw-bold">Last Name</label>
-                                    <input type="text" className="form-control border-0 border-bottom border-2 border-dark" />
-                               </div>
+                            <div className="mb-3">
+                                <label htmlFor="exampleInputEmail1" className="form-label fw-bold">Your Name</label>
+                                <input onBlur={getName} type="text" className="form-control border-0 border-bottom border-2 border-dark" required/>
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="exampleInputEmail1" className="form-label fw-bold">Email address</label>
-                                <input onBlur={getEmail} type="email" className="form-control border-0 border-bottom border-2 border-dark" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                                <input onBlur={getEmail} type="email" className="form-control border-0 border-bottom border-2 border-dark" id="exampleInputEmail1" aria-describedby="emailHelp" required/>
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="exampleInputPassword1" className="form-label fw-bold">Password</label>
-                                <input onBlur={getPass} type="password" className="form-control border-0 border-bottom border-2 border-dark" id="exampleInputPassword1"/>
+                                <input onBlur={getPass} type="password" className="form-control border-0 border-bottom border-2 border-dark" id="exampleInputPassword1" required/>
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="exampleInputPassword1" className="form-label fw-bold">Confirm Password</label>
-                                <input onBlur={getConfirmPass} type="password" className="form-control border-0 border-bottom border-2 border-dark" id="exampleInputPassword1"/>
+                                <input onBlur={getConfirmPass} type="password" className="form-control border-0 border-bottom border-2 border-dark" id="exampleInputPassword1" required/>
                             </div>
                             <h6 className="mb-3 text-danger">{error}</h6>
                             <button type="submit" className="btn btn-primary px-5 py-3 text-uppercase">Sign Up</button>

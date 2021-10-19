@@ -23,7 +23,7 @@ const ServiceDetails = () => {
     return (
         <div className="container my-5 py-5">
            <div className="cardd">
-            <h5 className="card-header text-center display-4 bg-dark text-white">Service</h5>
+            <h5 className="card-header text-center display-4 bg-dark text-white">Service Info</h5>
             <div className="">
             <table className="table table-striped table-bordered border-top-0 fs-4">
                 <tbody>

@@ -25,7 +25,7 @@ const Login = () => {
             // ...
         });
     }
-
+    
     //manual login
     const handleManualLogin = (e) => {
         e.preventDefault();

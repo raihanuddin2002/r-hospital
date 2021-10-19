@@ -3,6 +3,7 @@ import { GoogleAuthProvider,signInWithPopup,onAuthStateChanged,createUserWithEma
 import { getAuth } from "firebase/auth";
 import { useState } from "react";
 import initializeAuthentication from "../Atuhentication/firebase.init";
+import useObserver from './useObserver';
 
 initializeAuthentication();
 
@@ -31,7 +32,7 @@ const useFirebase = () => {
     // Log Out 
     const logOut = () => {
         signOut(auth).then(() => {
-
+            setUser('');
           }).catch((error) => {
             setError(error);
           })
@@ -40,25 +41,34 @@ const useFirebase = () => {
           });
     }
 
-    // Observe 
-    useEffect( () => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-              setUser(user)
-              const uid = user.uid;
-              // ...
-            } else {
-              setError('');
-            }
-            setIsLoading(false);
-          });
-    },[]);
+    
+        const {signUpUser} = useObserver();
+        
+        console.log(signUpUser)
+        useEffect( () => {
+          setUser(signUpUser);
+        },[signUpUser])
+    // // Observe 
+    //   useEffect( () => {
+    //     onAuthStateChanged(auth, (user) => {
+    //         if (user) {
+    //           setUser(user)
+    //           const uid = user.uid;
+    //           // ...
+    //         } else {
+    //           setError('');
+    //         }
+    //         setIsLoading(false);
+    //       });
+    // },[]);
+
     return {
         user,
         error,
         isLoading,
         signInWithGoogle,
         signInEmailAndPassword,
+        onAuthStateChanged,
         logOut
         
     }

@@ -107,3 +107,16 @@
 .service-col:hover{
   background-color: rgba(192, 221, 255, 0.8) !important;
 }
+.about-container{
+  background: url(https://i.ibb.co/Bg8SFrs/oh-planning-saint-john-medical-center-entrance-rendering-hero.jpg);
+  height: 60vh;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+.about-container-clone{
+  height: 60vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+}

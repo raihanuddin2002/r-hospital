@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
+import useAuth from '../../hooks/useAuth';
 
 const Header = () => {
     const allContext= useContext(AuthContext);
     const {user,logOut} = allContext;
+    // const {user,logOut} = useAuth();
     return (
         <div className="sticky-top bg-white">
             <nav className="navbar navbar-expand-lg navbar-light">
@@ -25,10 +27,7 @@ const Header = () => {
                          <Link className="nav-link text-dark" to="/our-services">Our Services</Link>
                         </li>
                         <li className="nav-item">
-                         <Link className="nav-link text-dark" to="/notices">Notices</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link text-dark" to="/gellary">Gellary</Link>
+                         <Link className="nav-link text-dark" to="/blog">Blog</Link>
                         </li>
                     </ul>
 
@@ -42,7 +41,7 @@ const Header = () => {
                        {!user && <li className="nav-item">
                             <Link className="nav-link" to="/signup"><button className="btn-btn fw-bold text-uppercase rounded-2">Sign up</button></Link>
                         </li>}
-                       {user && <li className="nav-item">
+                       {user.email && <li className="nav-item">
                             <Link className="nav-link" to="/"><button className="btn-btn fw-bold text-uppercase rounded-2">{user.displayName}</button></Link>
                         </li>}
                     </ul>
