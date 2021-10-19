@@ -5,9 +5,9 @@ import useAuth from '../../hooks/useAuth';
 const PrivateRoute = ({children, ...rest}) => {
     const {user,isLoading} = useAuth();
 
-   if(user.email === undefined && isLoading === true){
-     return "Loading..";
-   }
+  //  if((user.email === '' || user.email === undefined) && isLoading === true){
+  //    return "Loading..";
+  //  }
     return (
         <Route
         {...rest}
