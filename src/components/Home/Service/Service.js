@@ -5,7 +5,7 @@ const Service = (props) => {
     const {id,title, description, image_url} = props.data;
     return (
         <div className="col">
-            <article className="p-5 bg-light shadow-lg rounded-4">
+            <article className="service-col p-5 bg-light shadow-lg rounded-4">
                 <p className="mb-4">
                     <img src={image_url} alt="" className="img-fluid" />
                 </p>

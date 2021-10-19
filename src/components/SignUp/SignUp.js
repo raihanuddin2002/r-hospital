@@ -1,16 +1,64 @@
-import React from 'react';
+import { createUserWithEmailAndPassword, getAuth } from '@firebase/auth';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
 const SignUp = () => {
+    const [email,setEmail] = useState('');
+    const [password,setPassword] = useState('');
+    const [confirmPassword,setConfirmPassword] = useState('');
+    const [error,setError] = useState('');
+
     const {signInWithGoogle} = useAuth();
+
+    // Google Sign Up
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+        .then((result) => {
+            console.log("Login Sucessfully");
+            // ...
+        }).catch((error) => {
+            // ...
+        });
+    }
+
+    // get email
+    const getEmail = (e) => {
+        setEmail(e.target.value);
+    }
+    // get pass
+    const getPass = (e) => {
+        setPassword(e.target.value);
+    }
+    // get confirm
+    const getConfirmPass = (e) => {
+       const confirmPass =  e.target.value;
+       setConfirmPassword(confirmPass);
+    }
+
+    // Manual registration
+    const handleRegistration = (e) => {
+        e.preventDefault();
+
+        const auth =getAuth();
+        console.log(email,password);
+        if(password !== confirmPassword){
+            return setError("Password not matched!!");
+        }
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((result) => {
+            
+        })
+        .catch((error) => {
+        });
+    }
     return (
         <div className="bg-dark py-5">
             <div className="container text-start p-5 bg-white my-5">
                 <div className="row row-cols-lg-2">
                     <div className="col my-auto">
                         <h1 className="mb-5">Sign Up</h1>
-                        <form className="border-0">
+                        <form onSubmit={handleRegistration} className="border-0">
                             <div className="mb-3 row row-cols-md-2">
                                <div>
                                     <label htmlFor="exampleInputEmail1" className="form-label fw-bold">First Name</label>
@@ -24,17 +72,17 @@ const SignUp = () => {
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="exampleInputEmail1" className="form-label fw-bold">Email address</label>
-                                <input type="email" className="form-control border-0 border-bottom border-2 border-dark" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                                <input onBlur={getEmail} type="email" className="form-control border-0 border-bottom border-2 border-dark" id="exampleInputEmail1" aria-describedby="emailHelp" />
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="exampleInputPassword1" className="form-label fw-bold">Password</label>
-                                <input type="password" className="form-control border-0 border-bottom border-2 border-dark" id="exampleInputPassword1"/>
+                                <input onBlur={getPass} type="password" className="form-control border-0 border-bottom border-2 border-dark" id="exampleInputPassword1"/>
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="exampleInputPassword1" className="form-label fw-bold">Confirm Password</label>
-                                <input type="password" className="form-control border-0 border-bottom border-2 border-dark" id="exampleInputPassword1"/>
+                                <input onBlur={getConfirmPass} type="password" className="form-control border-0 border-bottom border-2 border-dark" id="exampleInputPassword1"/>
                             </div>
-                            
+                            <h6 className="mb-3 text-danger">{error}</h6>
                             <button type="submit" className="btn btn-primary px-5 py-3 text-uppercase">Sign Up</button>
                             <div className="my-3 text-center">
                               <Link to="/login"><span>Already has an account?</span></Link>
@@ -48,7 +96,7 @@ const SignUp = () => {
                         </div>
                        
                         <div className="text-center d-flex">
-                            <button onClick={signInWithGoogle} className="btn btn-danger w-100 me-2">Google</button>
+                            <button onClick={handleGoogleSignIn} className="btn btn-danger w-100 me-2">Google</button>
                             <button className="btn btn-dark w-100 me-2">Github</button>
                         </div>
                     </div>

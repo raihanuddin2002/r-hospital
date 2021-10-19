@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLocation,useHistory } from 'react-router';
-import {AuthContext} from '../../context/AuthProvider';
 import useAuth from '../../hooks/useAuth';
 
 const Login = () => {
@@ -15,6 +14,7 @@ const Login = () => {
     // const redirect_url = "/serviceDetails";
     console.log(redirect_url)
 
+    // Google Login
     const handleGoogleSignIn = () => {
         signInWithGoogle()
         .then((result) => {
@@ -25,13 +25,18 @@ const Login = () => {
             // ...
         });
     }
+
+    //manual login
+    const handleManualLogin = (e) => {
+        e.preventDefault();
+    }
     return (
         <div className="bg-dark py-5">
             <div className="container text-start p-5 bg-white my-5">
                 <div className="row row-cols-lg-2">
                     <div className="col my-auto">
                         <h1 className="mb-5">Log In</h1>
-                        <form className="border-0">
+                        <form onSubmit={handleManualLogin} className="border-0">
                             <div className="mb-3">
                                 <label htmlFor="exampleInputEmail1" className="form-label fw-bold">Email address</label>
                                 <input type="email" className="form-control border-0 border-bottom border-2 border-dark" id="exampleInputEmail1" aria-describedby="emailHelp" />
