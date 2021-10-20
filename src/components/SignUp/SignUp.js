@@ -1,14 +1,12 @@
-import { createUserWithEmailAndPassword, getAuth, updateProfile  } from '@firebase/auth';
+import {getAuth, updateProfile  } from '@firebase/auth';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import {useHistory, useLocation } from 'react-router';
+import { Link,useLocation } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
 const SignUp = () => {
     // History & location
     const location = useLocation();
-    const history = useHistory();
-    const redirect_url = location.state?.from || "/home";
+    //const redirect_url = location.state?.from || "/home";
     const [name,setName] = useState('');
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
@@ -16,21 +14,20 @@ const SignUp = () => {
     const [error,setError] = useState('');
     const [signUpMessage, setSignUpMessage] = useState(''); // success signup message
     
-
-    const {signInWithGoogle} = useAuth();
+    const {signInWithGoogle,signUpManually} = useAuth();
     const auth =getAuth();
+
     // Google Sign Up
     const handleGoogleSignIn = () => {
         signInWithGoogle()
             .then((result) => {
-                setTimeout( () => {
-                    setSignUpMessage("");
-                },5000);
-            // ...
-        }).catch((error) => {
-            setError(error.message);
-            // ...
-        });
+               setSignUpMessage("Sign Up Successful :)")
+
+            }).catch((error) => {
+                setError(error.message);
+                // ...
+            })
+        setSignUpMessage("");
     }
 
     // get name
@@ -66,28 +63,25 @@ const SignUp = () => {
             setError('');
         }
 
-        
-
         // Manual create account
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((result) => {
-                setUserName();
-                setSignUpMessage("Your New Account Created Succufully");
-                e.target.reset();
-                setTimeout( () => {
-                    setSignUpMessage("");
-                    history.push(redirect_url);
-                },5000);
-            })
-            .catch((error) => {
-                setError(error.message);
-            });
+            signUpManually(name,email,password)
+                .then((result) => {
+                    updateProfile(auth.currentUser, {
+                    displayName: name})
+                    .then(() => {
+                        setSignUpMessage("Your New Account Created Succufully :)");
+                        e.target.reset();
+                    })
+                    .catch((error) => {
+                        setError(error.message);
+                    });
+                   
+                })
+                .catch((error) => {
+                    setError(error.message);
+                })
 
-        // Set username
-        const setUserName = () => {
-            updateProfile(auth.currentUser, {
-                displayName: name}).then(() => {}).catch((error) => {setError(error)});
-        }
+           
     }
    
     return (
@@ -95,7 +89,7 @@ const SignUp = () => {
             <div className="container text-start p-5 bg-white my-5">
                 <div className="row row-cols-lg-2">
                     <div className="col my-auto">
-                        {signUpMessage && <h6 className="text-success" role="alert">{signUpMessage}</h6>}
+                        {signUpMessage && <h6 className="text-success text-end fs-5" role="alert">{signUpMessage}</h6>}
                         <h1 className="mb-5">Sign Up</h1>
                         <form onSubmit={handleRegistration} className="border-0">
                             <div className="mb-3">

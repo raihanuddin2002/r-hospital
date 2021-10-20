@@ -1,32 +1,21 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useLocation,useHistory } from 'react-router';
+import { Link, useLocation,useHistory } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
-import { getAuth, signInWithEmailAndPassword } from '@firebase/auth';
 
 const Login = () => {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [error,setError] = useState('');
 
-    const auth = getAuth();
-    const {signInWithGoogle} = useAuth();
+    const {signInWithGoogle,logInManually,url} = useAuth();
+
 
     // History & location
     const location = useLocation();
     const history = useHistory();
-    const redirect_url = location.state?.from || "/home";
+    const redirect_url = location.state?.from.pathname || "/home";
 
-    // Google Login
-    const handleGoogleSignIn = () => {
-        signInWithGoogle()
-        .then((result) => {
-            history.push(redirect_url);
-            // ...
-        }).catch((error) => {
-            setError(error.message);
-        });
-    }
+
     // get email
     const getEmail = (e) => {
         setEmail(e.target.value);
@@ -35,24 +24,36 @@ const Login = () => {
     const getPass = (e) => {
         setPassword(e.target.value);
     }
+    /*===================================
+     *          Login System
+     *===================================*/
+    // Google Login
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+        .then((result) => {
+                 history.push(redirect_url);
+  
+            }).catch((error) => {
+                setError(error.message);
+                // ...
+            })
+    }
     //manual login
     const handleManualLogin = (e) => {
         e.preventDefault();
+        e.target.reset();
 
-        // Manual Login
-        signInWithEmailAndPassword(auth, email, password)
+        logInManually(email,password)
             .then((result) => {
-                // Signed in 
-                const user = result.user;
                 history.push(redirect_url);
                 console.log("Login Sucessfully");
-                setError("")
-                e.target.reset();
+                setError("");
                 // ...
             })
             .catch((error) => {
                 setError(error.message);
-            });
+            })
+
     }
     return (
         <div className="bg-dark py-5">
