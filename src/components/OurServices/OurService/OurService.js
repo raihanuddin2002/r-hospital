@@ -4,21 +4,17 @@ import { Link } from 'react-router-dom';
 const OurService = (props) => {
     const {id,title, description,doctor_name, degree, image_url} = props.data;
     return (
-        <div className="col">
-            <div className="card mb-3 bg-skyblue">
-                <div className="row g-0">
-                    <div className="col-md-3 d-flex justify-content-center align-items-center">
-                        <img src={image_url} className="img-fluid rounded-start" alt="..." />
-                    </div>
-                    <div className="col-md-9">
-                    <div className="card-body">
-                        <h5 className="card-title fs-1">{title}</h5>
-                        <p className="card-text">{description}</p>
-                        <h4 className="card-text">{doctor_name} ({degree})</h4>
-                        <Link to={`serviceDetails/${id}`}><button className="bg-dark mt-3 py-2 px-4 w-100 border-0 text-white">Read more</button></Link>
-                    </div>
-                    </div>
+        <div className="col d-flex justify-content-center align-items-stretch">
+            <div className="row border w-100">
+                <div  style={{background: "#3f4a4a17"}} className="col-md-12 p-5">
+                    <img style={{width:"10%"}} className="img-fluid mb-3" src={image_url} alt="" />
+                    <h3 className="text-uppercase">{title}</h3>
+                    <p>{description}</p>
+                    <h5 className="mb-0">{doctor_name}</h5>
+                    <small>({degree})</small>
+                    <Link to={`serviceDetails/${id}`}><p  className="m-0 mt-4"><button className="btn btn-primary rounded-0">Read more</button></p></Link>
                 </div>
+
             </div>
         </div>
     );
