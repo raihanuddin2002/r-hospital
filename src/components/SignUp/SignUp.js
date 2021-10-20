@@ -1,11 +1,14 @@
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, updateProfile  } from '@firebase/auth';
-import React, { useEffect, useState } from 'react';
+import { createUserWithEmailAndPassword, getAuth, updateProfile  } from '@firebase/auth';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {useHistory } from 'react-router';
+import {useHistory, useLocation } from 'react-router';
 import useAuth from '../../hooks/useAuth';
 
 const SignUp = () => {
+    // History & location
+    const location = useLocation();
     const history = useHistory();
+    const redirect_url = location.state?.from || "/home";
     const [name,setName] = useState('');
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
@@ -73,13 +76,13 @@ const SignUp = () => {
                 e.target.reset();
                 setTimeout( () => {
                     setSignUpMessage("");
-                    history.push("/login");
+                    history.push(redirect_url);
                 },5000);
             })
             .catch((error) => {
                 setError(error.message);
             });
-            
+
         // Set username
         const setUserName = () => {
             updateProfile(auth.currentUser, {

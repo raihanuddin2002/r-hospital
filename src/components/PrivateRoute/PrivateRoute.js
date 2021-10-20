@@ -3,11 +3,8 @@ import { Redirect, Route } from 'react-router';
 import useAuth from '../../hooks/useAuth';
 
 const PrivateRoute = ({children, ...rest}) => {
-    const {user,isLoading} = useAuth();
-
-  //  if((user.email === '' || user.email === undefined) && isLoading === true){
-  //    return "Loading..";
-  //  }
+    const {user} = useAuth();
+    
     return (
         <Route
         {...rest}
@@ -20,6 +17,7 @@ const PrivateRoute = ({children, ...rest}) => {
                 pathname: "/login",
                 state: { from: location }
               }}
+              
             />
           )
         }

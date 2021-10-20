@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import useAuth from '../../hooks/useAuth';
 
 const ServiceDetails = () => {
     const {id} = useParams();

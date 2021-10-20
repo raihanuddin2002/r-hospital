@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLocation,useHistory } from 'react-router';
 import useAuth from '../../hooks/useAuth';
@@ -14,7 +14,6 @@ const Login = () => {
 
     // History & location
     const location = useLocation();
-    console.log(location)
     const history = useHistory();
     const redirect_url = location.state?.from || "/home";
 

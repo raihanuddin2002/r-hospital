@@ -1,12 +1,11 @@
 import { getAuth, onAuthStateChanged } from '@firebase/auth';
 import { useState } from 'react';
-import React, { useEffect} from 'react';
+import { useEffect} from 'react';
 
 const useObserver = () => {
     const auth = getAuth();
     const [signUpUser,setSignUpUser] = useState('');
     const [error,setError] = useState('');
-    const [isSignUpLoading, setIsLoading] = useState(true);
      // Observe 
      useEffect( () => {
         onAuthStateChanged(auth, (user) => {
@@ -16,13 +15,11 @@ const useObserver = () => {
             } else {
               setError('');
             }
-            setIsLoading(false);
           });
     },[signUpUser]);
     return {
         signUpUser,
-        error,
-        isSignUpLoading
+        error
     } 
 };
 
