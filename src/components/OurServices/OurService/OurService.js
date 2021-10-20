@@ -6,7 +6,7 @@ const OurService = (props) => {
     return (
         <div className="col d-flex justify-content-center align-items-stretch">
             <div className="row border w-100">
-                <div  style={{background: "#3f4a4a17"}} className="col-md-12 p-5">
+                <div className="col-md-12 p-5 ourservice-article">
                     <img style={{width:"10%"}} className="img-fluid mb-3" src={image_url} alt="" />
                     <h3 className="text-uppercase">{title}</h3>
                     <p>{description}</p>

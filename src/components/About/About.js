@@ -18,7 +18,7 @@ const About = () => {
             </div>
 
             {/* Overview */}
-            <div className="bg-secondary">
+            <div style={{background: "#cdcdcd"}}>
             <div className="container py-5">
                 <div className="courses-header text-center">
                     <h2 className="card-header text-white courses-heading py-4 mt-lg-5 display-3 bg-dark">OVERVIEW</h2>
