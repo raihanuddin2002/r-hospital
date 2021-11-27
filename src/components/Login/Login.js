@@ -7,7 +7,7 @@ const Login = () => {
     const [password,setPassword] = useState('');
     const [error,setError] = useState('');
 
-    const {signInWithGoogle,logInManually,url} = useAuth();
+    const {signInWithGoogle,logInManually} = useAuth();
 
 
     // History & location
